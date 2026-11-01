@@ -28,7 +28,32 @@ footer{text-align:center;color:#65738b;font-size:13px;padding:24px 12px}
 .pdf-details{margin-top:14px;border-top:1px solid #dce4ef;padding-top:12px}
 .pdf-details summary{cursor:pointer;color:var(--navy);font-weight:bold}
 .pdf-details iframe{width:100%;height:70vh;min-height:420px;border:1px solid #dce4ef;border-radius:10px;margin-top:12px}
-@media(max-width:480px){.schedule-actions .btn{width:100%;text-align:center}.schedule-image-wrap img{max-width:none;max-height:75vh;width:auto}}
+@media(max-width:600px){
+  body{font-size:15px;line-height:1.8}
+  header{padding:22px 14px}
+  .badge{width:54px;height:54px;font-size:27px}
+  main{margin:14px auto;padding:0 10px}
+  .grid{grid-template-columns:1fr;gap:10px}
+  .card{padding:15px;border-radius:14px}
+  .card h2,.schedule-section h2{font-size:18px}
+  .btn{min-height:44px;padding:10px 13px}
+  .schedule-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+  .grade-btn{padding:9px 4px;font-size:13px;white-space:normal}
+  .schedule-image-wrap{padding:4px;overflow:auto;touch-action:pan-x pan-y}
+  .schedule-image-wrap img{width:100%;max-width:100%;height:auto;max-height:none;object-fit:contain}
+  .schedule-actions{display:grid;grid-template-columns:1fr;gap:8px}
+  .schedule-actions .btn{width:100%;text-align:center}
+  .pdf-details iframe{height:65vh;min-height:320px}
+  .number{font-size:16px}
+}
+@media(min-width:601px) and (max-width:800px){
+  main{padding:0 16px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(prefers-reduced-motion:no-preference){
+  .card{transition:box-shadow .2s ease}
+  .card:focus-within{box-shadow:0 8px 24px #172a4d18}
+}
 </style></head><body>
 <header><div class="badge" aria-hidden="true">✦</div><h1>دبیرستان فرزانگان، دوره دوم</h1><p>سامانه ارتباط با مدرسه</p><p>با هم برای آینده‌ای روشن‌تر</p></header>
 <main><p class="intro">اولیای گرامی، از طریق بخش‌های زیر با مدرسه در ارتباط باشید.</p><section class="grid">
@@ -47,7 +72,7 @@ footer{text-align:center;color:#65738b;font-size:13px;padding:24px 12px}
     <button class="btn grade-btn" type="button" data-grade="grade12" aria-pressed="false">پایه دوازدهم</button>
   </div>
   <div class="schedule-image-wrap">
-    <img id="gradeSchedule" src="grade10.png" alt="برنامه هفتگی پایه دهم" loading="lazy">
+    <a id="scheduleImageLink" href="grade10.png" target="_blank" rel="noopener" aria-label="باز کردن تصویر برنامه در اندازه کامل"><img id="gradeSchedule" src="grade10.png" alt="برنامه هفتگی پایه دهم" loading="lazy"></a>
   </div>
   <div class="schedule-actions">
     <a class="btn" href="weekly-schedule-1405-1406.pdf" target="_blank" rel="noopener">📄 مشاهده فایل PDF اصلی</a>
@@ -67,6 +92,7 @@ document.querySelectorAll('.grade-btn').forEach(function(btn){
     btn.classList.add('active');btn.setAttribute('aria-pressed','true');
     var img=document.getElementById('gradeSchedule');
     img.src=btn.dataset.grade+'.png';
+    document.getElementById('scheduleImageLink').href=btn.dataset.grade+'.png';
     var names={grade10:'دهم',grade11:'یازدهم',grade12:'دوازدهم'};
     img.alt='برنامه هفتگی پایه '+names[btn.dataset.grade];
   });
